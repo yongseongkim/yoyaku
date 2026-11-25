@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "review_status": "draft_development_probes_not_independent_gold",
+  "cases": [
+    {"id":"ja-greeting","text":"リベラ渋谷です。どのようなご用件でしょうか。","source_language":"ja-JP","target_language":"ko-KR","reference":"리베라 시부야입니다. 어떤 용건이신가요?"},
+    {"id":"ja-party-question","text":"何名様でしょうか。","source_language":"ja-JP","target_language":"ko-KR","reference":"몇 분이신가요?","checks":[{"name":"question-preserved","pattern":"(까요|나요|가요|신지|습니까|세요|몇.*[?？])"}]},
+    {"id":"ja-time-question","text":"19時半でもよろしいでしょうか。","source_language":"ja-JP","target_language":"ko-KR","reference":"19시 반도 괜찮으실까요?","checks":[{"name":"question-preserved","pattern":"(까요|나요|가요|습니까|괜찮.*[?？])"}]},
+    {"id":"ja-details-question","text":"11月14日19時、2名様、キム・ミンス様でよろしいでしょうか。","source_language":"ja-JP","target_language":"ko-KR","reference":"11월 14일 19시, 두 분, 김민수 님 맞으실까요?","checks":[{"name":"confirmation-is-a-question","pattern":"(까요|나요|가요|습니까|맞.*[?？])"}]},
+    {"id":"ja-booking-not-confirmed","text":"ご予約はまだ確定していません。","source_language":"ja-JP","target_language":"ko-KR","reference":"예약은 아직 확정되지 않았습니다.","checks":[{"name":"negative-booking-status","pattern":"(않|아니|미확정|안[ ]*됐|안[ ]*되|안[ ]*되었)"}]},
+    {"id":"ja-full-alternative","text":"本日は満席ですが、明日の19時でしたらご案内できます。","source_language":"ja-JP","target_language":"ko-KR","reference":"오늘은 만석이지만 내일 19시는 가능합니다.","checks":[{"name":"today-full","pattern":"(만석|꽉|없)"},{"name":"tomorrow-preserved","pattern":"내일"}]},
+    {"id":"ja-party-correction","text":"すみません、2名ではなく4名様ですね。","source_language":"ja-JP","target_language":"ko-KR","reference":"죄송합니다. 두 분이 아니라 네 분이시군요.","checks":[{"name":"correction-negation","pattern":"(아니|대신|정정|잘못|않)"},{"name":"four-people","pattern":"(4|네|넷|사)[ ]*(명|분|사람)"}]},
+    {"id":"ja-cancellation-fee","text":"当日のキャンセルは全額の料金がかかります。この条件でよろしいでしょうか。","source_language":"ja-JP","target_language":"ko-KR","reference":"당일 취소는 전액 요금이 발생합니다. 이 조건으로 괜찮으실까요?","checks":[{"name":"full-fee","pattern":"(전액|전체|모든|100[ ]*%)"},{"name":"consent-question","pattern":"(까요|나요|가요|습니까|[?？])"}]},
+    {"id":"ja-cannot-remove-shrimp","text":"申し訳ありませんが、エビ抜きにはできません。","source_language":"ja-JP","target_language":"ko-KR","reference":"죄송하지만 새우를 빼드릴 수 없습니다.","checks":[{"name":"cannot","pattern":"(없|않|불가|안[ ]*됩|안[ ]*돼)"},{"name":"shrimp","pattern":"새우"}]},
+    {"id":"ja-hold-transfer","text":"担当者に代わりますので、少々お待ちください。","source_language":"ja-JP","target_language":"ko-KR","reference":"담당자에게 바꿔드릴 테니 잠시 기다려 주세요."},
+    {"id":"ja-booking-accepted","text":"ご予約を承りました。当日お待ちしております。","source_language":"ja-JP","target_language":"ko-KR","reference":"예약 접수했습니다. 당일에 뵙겠습니다.","checks":[{"name":"accepted-booking-status","pattern":"(접수|받았|확정|완료|예약.*되었|예약.*됐|예약.*되셨)"}]},
+    {"id":"ja-cancellation-not-complete","text":"キャンセルはまだ完了していません。","source_language":"ja-JP","target_language":"ko-KR","reference":"취소는 아직 완료되지 않았습니다.","checks":[{"name":"not-cancelled-yet","pattern":"(않|아니|미완료|안[ ]*됐|안[ ]*되|안[ ]*되었)"}]},
+    {"id":"ko-request","text":"11월 14일 저녁 7시에 두 명 예약하고 싶어요.","source_language":"ko-KR","target_language":"ja-JP","reference":"11月14日の19時に2名で予約したいです."},
+    {"id":"ko-party-correction","text":"두 명이 아니라 네 명입니다.","source_language":"ko-KR","target_language":"ja-JP","reference":"2名ではなく4名です。","checks":[{"name":"correction-negation","pattern":"(なく|ない|違|訂正|ありません|ません)"},{"name":"four-people","pattern":"(4|四)[ ]*(名|人)"}]},
+    {"id":"ko-decline-booking","text":"20시는 너무 늦어서 예약하지 않겠습니다.","source_language":"ko-KR","target_language":"ja-JP","reference":"20時は遅すぎるので、予約しません。","checks":[{"name":"no-booking","pattern":"(しません|しない|やめ|見送|控え|いたしません|取らない|取りません)"}]},
+    {"id":"ko-name","text":"김민수입니다.","source_language":"ko-KR","target_language":"ja-JP","reference":"キム・ミンスです。","checks":[{"name":"no-invented-name-kanji","pattern":"金民秀|金[ ]*ミン|金[ ]*民|金珉|金敏","absent":true}]},
+    {"id":"ko-no-allergy-remove-shrimp","text":"알레르기는 없지만 새우는 빼 주세요.","source_language":"ko-KR","target_language":"ja-JP","reference":"アレルギーはありませんが、エビは抜いてください。","checks":[{"name":"no-allergy","pattern":"(ありません|ない|ございません)"},{"name":"shrimp-mentioned","pattern":"(エビ|えび|海老|蝦)"}]},
+    {"id":"ko-decline-fee","text":"그 취소 수수료 조건에는 동의하지 않습니다.","source_language":"ko-KR","target_language":"ja-JP","reference":"そのキャンセル料の条件には同意しません。","checks":[{"name":"no-agreement","pattern":"(しません|しない|できません|できない|いたしません|ません|かねます)"}]},
+    {"id":"ko-date-correction","text":"11월 15일이 아니라 11월 14일입니다.","source_language":"ko-KR","target_language":"ja-JP","reference":"11月15日ではなく11月14日です。","checks":[{"name":"correction-negation","pattern":"(なく|ない|違|訂正|ありません|ません)"},{"name":"fourteenth","pattern":"(14|十四)[ ]*日"}]},
+    {"id":"ko-repeat-request","text":"이름을 다시 말씀해 주시겠어요?","source_language":"ko-KR","target_language":"ja-JP","reference":"お名前をもう一度おっしゃっていただけますか。","checks":[{"name":"repeat-request","pattern":"(もう一度|再度|再び)"}]},
+    {"id":"ko-do-not-confirm","text":"아직 확정하지 말아 주세요. 취소 수수료부터 알려 주세요.","source_language":"ko-KR","target_language":"ja-JP","reference":"まだ確定しないでください。先にキャンセル料を教えてください。","checks":[{"name":"do-not-confirm","pattern":"(しないで|しないよう|しない|しないこと|確定.*お待ち|確定.*待っ|確定.*控え)"}]},
+    {"id":"ko-shrimp-allergy","text":"새우 알레르기가 있습니다. 조금만 들어가도 안 됩니다.","source_language":"ko-KR","target_language":"ja-JP","reference":"エビのアレルギーがあります。少しでも入っていてはいけません。","checks":[{"name":"shrimp-mentioned","pattern":"(エビ|えび|海老|蝦)"},{"name":"cannot-even-small-amount","pattern":"(いけません|だめ|ダメ|駄目|困ります|できません|ないで|入れない|少.*[も].*(無理|危険|不可))"}]},
+    {"id":"ko-accept-alternative","text":"네, 19시 반에 두 명으로 부탁드려요.","source_language":"ko-KR","target_language":"ja-JP","reference":"はい、19時半に2名でお願いします。"},
+    {"id":"ko-change-not-cancel","text":"예약을 취소하려는 게 아니라 날짜만 바꾸고 싶어요.","source_language":"ko-KR","target_language":"ja-JP","reference":"予約をキャンセルするのではなく、日付だけ変更したいです。","checks":[{"name":"not-cancel","pattern":"(なく|ない|違|ありません|ません)"},{"name":"date-change","pattern":"(日付|日にち|日程|日).*変更|変更.*(日付|日にち|日程|日)"}]}
+  ]
+}

@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#235643">
+  <meta name="description" content="한국어로 연습하는 일본어 전화 예약. Twilio 없이 로컬 모의 통화로 예약 흐름을 확인하세요.">
+  <title>yoyaku · 한국어로 하는 일본어 예약</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+  <script type="module" src="/app.js"></script>
+</head>
+<body>
+  <div class="site-shell">
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="yoyaku 홈"><span class="brand-mark">y.</span>yoyaku<span class="brand-jp" lang="ja">よやく</span></a>
+      <div class="header-right"><span class="local-badge"><i></i> 로컬 모의 통화</span><button class="text-button" id="guide-open">이용 방법 <span aria-hidden="true">↗</span></button></div>
+    </header>
+
+    <main>
+      <section class="intro">
+        <div><p class="eyebrow">일본어 전화 예약 도우미</p><h1>말은 한국어로,<br>예약은 <span>일본어로.</span></h1><p class="intro-copy">직원의 말은 한국어로 읽고, 내 답변은 일본어로 전해요.<br>첫 통화는 가상의 식당에서 편하게 연습해 보세요.</p></div>
+        <div class="intro-illustration" aria-hidden="true"><div class="illustration-ring"></div><span class="bubble bubble-ko">예약하고 싶어요.</span><span class="bubble bubble-ja" lang="ja">ご予約ですね。</span><span class="illustration-dot"></span><small>한국어 <span>⇄</span> 日本語</small></div>
+      </section>
+
+      <div id="notice" class="notice" role="alert" hidden></div>
+
+      <div class="workspace">
+        <aside class="setup-panel">
+          <div class="panel-heading"><span class="step-number">01</span><h2>어떤 예약을 할까요?</h2></div>
+          <div class="shop"><span class="shop-icon" aria-hidden="true">さ</span><div><strong>사쿠라 식당</strong><span>도쿄 · 가상 매장</span></div><span class="shop-tag">연습용</span></div>
+          <form id="reservation-form">
+            <label for="date">예약 날짜 <span>일본 현지 기준</span></label><input id="date" name="date" type="date" required data-lock>
+            <div class="form-row"><div><label for="time">시간</label><input id="time" name="time" type="time" value="19:00" max="22:59" required data-lock></div><div><label for="partySize">인원</label><select id="partySize" name="partySize" data-lock><option value="1">1명</option><option value="2" selected>2명</option><option value="3">3명</option><option value="4">4명</option><option value="5">5명</option><option value="6">6명</option></select></div></div>
+            <label for="name">예약자 이름</label><input id="name" name="name" value="김민수" maxlength="40" required data-lock>
+            <label for="nameJa">이름의 일본어 표기 <span>직원에게 전달할 이름</span></label><input id="nameJa" name="nameJa" value="キム・ミンス" maxlength="60" lang="ja" data-lock>
+            <label for="phone">가상 전화번호</label><input id="phone" name="phone" type="tel" value="+81300000001" required data-lock>
+            <button class="button button-primary start-call" id="start-call" type="submit"><span aria-hidden="true">☎</span> 모의 통화 시작</button>
+          </form>
+          <p class="form-footnote">실제 전화가 걸리지 않으며<br>Twilio 계정이나 API 키가 필요 없어요.</p>
+        </aside>
+
+        <section class="conversation-panel" aria-label="예약 대화">
+          <header class="conversation-header"><div><span class="step-number">02</span><h2>함께 이야기해요</h2></div><span class="call-status" id="call-status"><i></i><span>통화 대기</span></span></header>
+          <div class="language-bar"><span>내 언어 <strong>한국어</strong></span><span aria-hidden="true">⇄</span><span>직원 언어 <strong lang="ja">日本語</strong></span></div>
+          <div class="conversation-body" id="conversation-body">
+            <div id="empty-state" class="empty-state"><div class="empty-icon" aria-hidden="true"><span>가</span><span>あ</span></div><h3>일본어를 몰라도 괜찮아요.</h3><p>예약 조건을 입력하고 모의 통화를 시작하세요.<br>직원의 일본어 답변을 한국어 자막으로 보여드려요.</p><div class="empty-steps"><span>조건 입력</span><i>→</i><span>모의 통화</span><i>→</i><span>내용 확인</span></div></div>
+            <div class="messages" id="messages" role="log" aria-label="통화 대화 기록" aria-live="polite" aria-relevant="additions"></div>
+            <div id="waiting" class="waiting" role="status" hidden><span class="typing"><i></i><i></i><i></i></span><span id="waiting-text">직원이 답변을 준비하고 있어요.</span></div>
+          </div>
+          <div class="reply-area"><div class="reply-label"><label for="reply">한국어로 답변하기</label><button class="text-button small" id="stop-reply" disabled>전달 취소</button></div><div class="suggestions" id="suggestions"></div><form id="reply-form"><textarea id="reply" rows="2" placeholder="통화가 연결되면 추천 답변을 선택해 주세요." maxlength="500" disabled></textarea><button class="send-button" id="send-reply" type="submit" aria-label="답변을 일본어로 전달" disabled>↑</button></form><div class="composer-note"><span>준비된 문장을 사용하는 시나리오 테스트예요.</span><span>Ctrl + Enter</span></div></div>
+          <footer class="call-footer"><span id="footer-status">준비되면 왼쪽에서 통화를 시작하세요.</span><button class="end-call" id="end-call" disabled><span aria-hidden="true">☎</span> 통화 종료</button></footer>
+        </section>
+
+        <aside class="summary-panel"><div class="panel-heading"><span class="step-number">03</span><h2>예약 내용 확인</h2></div><span class="reservation-badge" id="reservation-status">예약 전</span><dl class="reservation-summary"><div><dt>예약 날짜</dt><dd id="summary-date">—</dd></div><div><dt>예약 시간</dt><dd id="summary-time">19:00</dd></div><div><dt>인원</dt><dd id="summary-party">2명</dd></div><div><dt>예약자</dt><dd id="summary-name">김민수</dd></div></dl><p class="confirmation-note" id="confirmation-note">직원의 확인을 받은 뒤,<br>내용이 맞는지 한 번 더 확인해 주세요.</p><button class="button confirm-button" id="confirm-reservation" disabled>직원 확인 후 예약 확정</button><div class="summary-tip"><span aria-hidden="true">✳</span><p>통화가 끝나도 예약이 확정된 것은 아니에요. 날짜와 시간, 인원, 이름을 꼭 확인하세요.</p></div></aside>
+      </div>
+
+      <details class="testbench" id="testbench"><summary><span><span class="terminal-icon" aria-hidden="true">&gt;_</span> 개발용 시나리오 테스트</span><span>Twilio 인터페이스 · 로컬 시뮬레이터 <i aria-hidden="true">⌄</i></span></summary><div class="testbench-body"><div class="scenario-controls"><label for="scenario">통화 시나리오</label><select id="scenario" data-lock></select><p id="scenario-description"></p><p class="test-limit">Calls API와 Media Streams는 로컬 HTTP/WebSocket으로 교환합니다. 미디어는 무음 PCMU 테스트 패킷이며, 대화 자막은 별도의 고정 fixture입니다. 실제 음성 인식·AI 번역·전화망 연결은 아직 검증하지 않습니다.</p></div><div class="protocol-panel"><div class="protocol-heading"><strong>프로토콜 이벤트</strong><span id="media-count">수신 0 · 송신 0</span></div><pre id="protocol-log">통화를 시작하면 API와 미디어 이벤트가 표시됩니다.</pre></div></div></details>
+    </main>
+    <footer class="site-footer"><span>yoyaku <span lang="ja">よやく</span></span><span>낯선 언어에도, 편안한 대화.</span><span>한국어 → 일본어 · LOCAL PROTOTYPE</span></footer>
+  </div>
+  <dialog id="guide"><button class="dialog-close" id="guide-close" aria-label="이용 방법 닫기">×</button><p class="eyebrow">HOW IT WORKS</p><h2>첫 예약을 연습해 보세요.</h2><ol><li>날짜, 시간, 인원과 이름을 입력하세요.</li><li>모의 통화를 시작하고 직원의 한국어 자막을 읽으세요.</li><li>추천 답변을 고른 뒤 화살표 버튼으로 전달하세요.</li><li>직원의 예약 확인을 받고 마지막으로 내용을 확정하세요.</li></ol><p class="dialog-note">이 버전은 준비된 한국어·일본어 문장을 사용합니다. 실제 전화를 걸거나 자유로운 문장을 AI로 번역하지 않습니다.</p><button class="button button-primary" id="guide-done">연습 시작하기</button></dialog>
+</body>
+</html>

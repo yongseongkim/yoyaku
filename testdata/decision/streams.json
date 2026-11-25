@@ -1,0 +1,505 @@
+{
+  "cases": [
+    {
+      "id": "ja-greeting",
+      "title": "음절이 들어오는 동안 기다리고 안정된 가게 인사를 확정",
+      "track": "shop",
+      "language": "ja-JP",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "リ",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 40,
+          "text": "リベ",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 80,
+          "text": "リベラ",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 120,
+          "text": "リベラ渋谷です。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 710,
+          "text": "リベラ渋谷です。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 820,
+          "text": "リベラ渋谷です。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "リベラ渋谷です。"
+        }
+      ]
+    },
+    {
+      "id": "ja-question",
+      "title": "인원 질문을 답변 대신 번역할 구간으로 판단",
+      "track": "shop",
+      "language": "ja-JP",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "何名様でしょうか。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 700,
+          "text": "何名様でしょうか。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "何名様でしょうか。"
+        }
+      ]
+    },
+    {
+      "id": "ja-no-reply-needed",
+      "title": "대답이 필요 없는 만석 안내도 번역",
+      "track": "shop",
+      "language": "ja-JP",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "本日は満席です。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 700,
+          "text": "本日は満席です。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "本日は満席です。"
+        }
+      ]
+    },
+    {
+      "id": "ja-short-ack",
+      "title": "짧은 맞장구도 의미 구간",
+      "track": "shop",
+      "language": "ja-JP",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "はい、承知しました。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 700,
+          "text": "はい、承知しました。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "はい、承知しました。"
+        }
+      ]
+    },
+    {
+      "id": "ja-condition",
+      "title": "19시라면이라는 미완성 조건 뒤의 설명을 대기",
+      "track": "shop",
+      "language": "ja-JP",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "19時でしたら",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 700,
+          "text": "19時でしたら",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "W"
+        },
+        {
+          "at_ms": 5700,
+          "text": "19時でしたら",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6000,
+          "text": "19時でしたらお席をご用意できます。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6700,
+          "text": "19時でしたらお席をご用意できます。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "19時でしたらお席をご用意できます。"
+        }
+      ]
+    },
+    {
+      "id": "ja-correction",
+      "title": "인원 정정의 결론이 나올 때까지 대기",
+      "track": "shop",
+      "language": "ja-JP",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "2名ではなく",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 700,
+          "text": "2名ではなく",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "W"
+        },
+        {
+          "at_ms": 5700,
+          "text": "2名ではなく",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6000,
+          "text": "2名ではなく4名です。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6700,
+          "text": "2名ではなく4名です。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "2名ではなく4名です。"
+        }
+      ]
+    },
+    {
+      "id": "ja-negation",
+      "title": "예약이 아직 확정되지 않았다는 부정을 끝까지 보존",
+      "track": "shop",
+      "language": "ja-JP",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "ご予約はまだ確定してい",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 700,
+          "text": "ご予約はまだ確定してい",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "W"
+        },
+        {
+          "at_ms": 5700,
+          "text": "ご予約はまだ確定してい",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6000,
+          "text": "ご予約はまだ確定していません。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6700,
+          "text": "ご予約はまだ確定していません。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "ご予約はまだ確定していません。"
+        }
+      ]
+    },
+    {
+      "id": "ko-condition-pause",
+      "title": "긴 무음으로 미완성 조건을 강제 확정하지 않음",
+      "track": "user",
+      "language": "ko-KR",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "취소 수수료가 없으면",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 700,
+          "text": "취소 수수료가 없으면",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "W"
+        },
+        {
+          "at_ms": 5700,
+          "text": "취소 수수료가 없으면",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6000,
+          "text": "취소 수수료가 없으면 예약하고 싶어요.",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6700,
+          "text": "취소 수수료가 없으면 예약하고 싶어요.",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "취소 수수료가 없으면 예약하고 싶어요."
+        }
+      ]
+    },
+    {
+      "id": "ko-headcount-correction",
+      "title": "두 명이 아니라 네 명이라는 정정 전체를 확정",
+      "track": "user",
+      "language": "ko-KR",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "두 명이 아니라",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 700,
+          "text": "두 명이 아니라",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "W"
+        },
+        {
+          "at_ms": 5700,
+          "text": "두 명이 아니라",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6000,
+          "text": "두 명이 아니라 네 명입니다.",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6700,
+          "text": "두 명이 아니라 네 명입니다.",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "두 명이 아니라 네 명입니다."
+        }
+      ]
+    },
+    {
+      "id": "ja-incomplete-tail",
+      "title": "완료된 문장 뒤에 미완성 꼬리가 있으면 전체 판단은 W",
+      "track": "shop",
+      "language": "ja-JP",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "本日は満席です。明日でしたら",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 700,
+          "text": "本日は満席です。明日でしたら",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "W"
+        },
+        {
+          "at_ms": 5700,
+          "text": "本日は満席です。明日でしたら",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6000,
+          "text": "本日は満席です。明日でしたらご案内できます。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 6700,
+          "text": "本日は満席です。明日でしたらご案内できます。",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "本日は満席です。明日でしたらご案内できます。"
+        }
+      ]
+    },
+    {
+      "id": "ko-asr-revision",
+      "title": "음성 인식의 두 명이 네 명으로 바뀌면 새 원문이 안정될 때까지 대기",
+      "track": "user",
+      "language": "ko-KR",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "두 명입니다.",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 300,
+          "text": "네 명입니다.",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 700,
+          "text": "네 명입니다.",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 1000,
+          "text": "네 명입니다.",
+          "quiet_ms": 900,
+          "samples": 32000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "네 명입니다."
+        }
+      ]
+    },
+    {
+      "id": "ja-wait-for-quiet",
+      "title": "원문이 안정돼도 후속 오디오나 무음 근거가 없으면 확정 대기",
+      "track": "shop",
+      "language": "ja-JP",
+      "snapshots": [
+        {
+          "at_ms": 0,
+          "text": "何名様でしょうか。",
+          "quiet_ms": 0,
+          "samples": 16000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 700,
+          "text": "何名様でしょうか。",
+          "quiet_ms": 0,
+          "samples": 16000,
+          "word_end_ms": 1000,
+          "expected": "-"
+        },
+        {
+          "at_ms": 900,
+          "text": "何名様でしょうか。",
+          "quiet_ms": 900,
+          "samples": 16000,
+          "word_end_ms": 1000,
+          "expected": "R",
+          "commit": "何名様でしょうか。"
+        }
+      ]
+    }
+  ],
+  "schema_version": 1
+}
