@@ -4,8 +4,8 @@
 #include <stdio.h>
 #include <stdatomic.h>
 
-// 이 파일은 Go에서 whisper.cpp를 호출하고 인식을 취소하는 데 필요한 연결 코드다.
-// 세션과 모델 관리, HTTP 요청 처리, 입력 검사, 통역 시점 판단은 Go에서 맡는다.
+// Go에서 설치된 whisper.cpp 라이브러리를 열고, 인식 중에도 취소를 요청할 수 있게 한다.
+// whisper.cpp의 콜백과 Go에서 호출한 취소 함수가 같은 플래그를 원자적으로 읽고 쓴다.
 struct yoyaku_whisper {
     void *library;
     struct whisper_context *context;

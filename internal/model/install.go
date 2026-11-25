@@ -52,8 +52,8 @@ func Hash(path string) (string, error) {
 	return hex.EncodeToString(h.Sum(nil)), e
 }
 
-// Download는 서버가 요청한 위치부터 데이터를 보내는지 확인한 뒤 다운로드를 이어 간다.
-// 파일 전체를 검증한 뒤에만 설치 경로로 옮긴다.
+// Download는 서버가 중단된 위치부터 보내면 이어받고, 전체 파일을 보내면 처음부터 다시 쓴다.
+// 내려받은 파일의 SHA-256 해시가 일치해야 설치 경로로 옮긴다.
 func Download(ctx context.Context, url, path, digest string, size int64, progress io.Writer) error {
 	if sum, e := Hash(path); e == nil && sum == digest {
 		return nil

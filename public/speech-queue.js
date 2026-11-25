@@ -1,4 +1,5 @@
-// 요청 순서대로 재생한다. 취소된 음성이 뒤늦게 나오지 않도록 합성 전과 재생 직전에 출력 세대를 확인한다.
+// 사용자가 재생을 멈춘 뒤 이전 합성 요청이 완료될 수 있다.
+// 요청 순서대로 합성하되 재생 직전에도 중단 이후의 요청인지 확인한다.
 export class SpeechQueue {
   constructor({ synthesize, play, error = () => {} }) {
     Object.assign(this, { synthesize, play, error });

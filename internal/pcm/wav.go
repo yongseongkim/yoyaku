@@ -6,8 +6,8 @@ import (
 	"math"
 )
 
-// Normalize는 크기 제한 안의 PCM16 모노 WAV를 브라우저 규격에 맞는 16 kHz WAV로 변환한다.
-// 부가 RIFF 청크가 있는 파일도 읽는다. 파일로 음성을 점검할 때 사용한다.
+// Normalize는 녹음 파일을 브라우저가 보내는 것과 같은 16 kHz 모노 PCM16 WAV로 변환한다.
+// 파일에는 부가 RIFF 청크가 있을 수 있어 샘플의 시작 위치를 헤더 길이로 단정하지 않는다.
 func Normalize(wav []byte) ([]byte, error) {
 	bad := errors.New("Use a PCM16 mono WAV up to 20 seconds")
 	if len(wav) < 44 || len(wav) > 4*1024*1024 || string(wav[:4]) != "RIFF" || string(wav[8:12]) != "WAVE" {

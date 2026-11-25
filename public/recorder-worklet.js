@@ -9,7 +9,8 @@ class Recorder extends AudioWorkletProcessor {
         this.buffer = new Float32Array(1024); this.offset = 0;
       }
     }
-    return true; // 마이크 입력은 녹음에만 쓰고 스피커로 내보내지 않는다.
+    // 스피커 출력은 비워 두고 다음 마이크 입력도 계속 받는다.
+    return true;
   }
 }
 registerProcessor('voice-recorder', Recorder);

@@ -66,8 +66,9 @@ func checkLive(parent context.Context, root string, out io.Writer) error {
 		for window := 1; len(remaining) >= 9600 && window <= 8; window++ {
 			id := fmt.Sprintf("%s-%d", track, window)
 			header := append([]byte{}, wav[:44]...)
-			windowWAV := append(header, remaining...) // 두 번째 창부터는 남은 오디오 길이에 맞춰 WAV 헤더를 다시 만든다.
+			windowWAV := append(header, remaining...)
 			if window > 1 {
+				// 앞부분을 덜어낸 뒤에는 남은 샘플 수에 맞게 WAV 헤더의 길이도 바꿔야 한다.
 				windowWAV = wavFromPCM(remaining)
 			}
 			send := func(sequence int) error {

@@ -20,7 +20,8 @@ func stopCaptionTimers(c *caption) {
 func (s *Session) updateCaption(id, text string, revision int, committed bool) {
 	c := s.captions[id]
 	if c == nil {
-		// 확정되고 번역까지 끝난 자막부터 비운다. 비울 자리가 없으면 새 자막 처리를 중단한다.
+		// 수정 중인 자막과 번역 중인 자막은 보존한다.
+		// 공간이 필요하면 원문이 확정되고 진행 중인 번역이 없는 자막 중 가장 오래된 것을 지운다.
 		for len(s.captionOrder) >= 64 {
 			removed := false
 			for i, oldID := range s.captionOrder {

@@ -10,7 +10,8 @@ import (
 	"time"
 )
 
-// LocalKey는 로컬 모델에 요청을 보내는 서버 쪽 클라이언트끼리만 공유하는 키다.
+// LocalKey는 서버에서 로컬 모델을 호출할 때 쓸 키를 읽거나 처음 한 번 생성한다.
+// 여러 프로세스가 함께 시작해도 먼저 생성한 키 파일을 공유한다.
 func LocalKey(root string) (string, error) {
 	path := filepath.Join(root, ".local-native/worker.key")
 	if e := os.MkdirAll(filepath.Dir(path), 0700); e != nil {

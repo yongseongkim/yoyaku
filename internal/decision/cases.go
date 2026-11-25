@@ -1,5 +1,5 @@
-// decision 패키지는 번역할 만큼 말의 뜻이 분명해졌는지 판단할 때 쓰는 입력과 테스트 사례를 정의한다.
-// R과 W는 이 판단에만 쓰며, 답변이나 끼어들기, 예약 확정은 사람이 결정한다.
+// decision 패키지는 지금까지 들은 말을 번역해도 될지 판단할 때 쓰는 입력과 테스트 사례를 정의한다.
+// 모델은 번역 시점만 판단하고, 언제 끼어들지, 어떻게 답할지, 예약할지는 사용자가 정한다.
 package decision
 
 import (
@@ -30,7 +30,7 @@ type Snapshot struct {
 	QuietMS   float64 `json:"quiet_ms"`
 	Samples   int     `json:"samples"`
 	WordEndMS int     `json:"word_end_ms"`
-	Expected  string  `json:"expected"` // “-”이면 판단을 요청하지 않고, R 또는 W이면 한 번 요청해 그 값을 기대한다.
+	Expected  string  `json:"expected"` // “-”는 판단 요청이 없는 시점, R과 W는 한 번 요청해 해당 응답을 받는 시점이다.
 	Commit    string  `json:"commit,omitempty"`
 }
 type Case struct {

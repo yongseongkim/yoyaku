@@ -218,7 +218,8 @@ func (a *Application) create(w http.ResponseWriter, r *http.Request) {
 		fail(w, 400, e.Error())
 		return
 	}
-	// 승인 여부와 수정 버전은 서버가 관리하므로 클라이언트가 보낸 값은 무시한다.
+	// 새 예약은 승인 전 상태에서 시작한다.
+	// 클라이언트가 보낸 필드 중 예약 내용만 복사하고 승인 여부와 수정 버전은 서버가 정한다.
 	reservation = Reservation{Name: reservation.Name, NameJA: reservation.NameJA, Date: reservation.Date, Time: reservation.Time, PartySize: reservation.PartySize, Phone: reservation.Phone, Scenario: reservation.Scenario}
 	key := r.Header.Get("Idempotency-Key")
 	if !regexp.MustCompile(`^[A-Za-z0-9:_-]{8,128}$`).MatchString(key) {

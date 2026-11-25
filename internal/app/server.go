@@ -367,8 +367,8 @@ func (s *Server) socket(w http.ResponseWriter, r *http.Request) {
 		failure(w, 503, "Start a general LLM and Korean/Japanese speech worker")
 		return
 	}
-	// WebSocket 연결에 HTTP 본문의 읽기·쓰기 기한이 남지 않도록 여기서 해제한다.
-	// 이후에는 메시지마다 별도 컨텍스트로 전송 대기와 취소를 처리한다.
+	// 통역은 최초 HTTP 요청보다 오래 이어질 수 있어 WebSocket으로 전환하기 전에 읽기·쓰기 기한을 해제한다.
+	// 연결 후에는 각 메시지를 보낼 때마다 쓰기 기한을 따로 둔다.
 	controller := http.NewResponseController(w)
 	_ = controller.SetReadDeadline(time.Time{})
 	_ = controller.SetWriteDeadline(time.Time{})

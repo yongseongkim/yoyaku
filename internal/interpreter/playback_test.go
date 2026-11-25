@@ -80,7 +80,8 @@ func TestTranslationFailureBlocksUntilExplicitStopAndMatchingAck(t *testing.T) {
 	h.next("playback.clear", nil)
 	h.commit("user", "새 문장입니다.", 3)
 	<-finished
-	// 모의 모델이 반환한 뒤에도 콜백이 실행 중일 수 있어, 세션 잠금을 잡고 결과가 반영될 때까지 기다린다.
+	// finished를 받아도 세션이 번역 결과를 대기열에 넣기 전일 수 있다.
+	// 새 음성이 대기열에 들어가야 잘못된 중단 확인을 받고도 그대로 대기하는지 검사할 수 있다.
 	deadline := time.Now().Add(time.Second)
 	for {
 		h.s.mu.Lock()

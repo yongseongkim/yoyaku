@@ -10,7 +10,7 @@ Use the Korean README to run the app or try a reservation. Check the specificati
 
 ## Runtime requirements and system overview
 
-- Build the backend, installer, model manager, CLI, and tests in Go. The launcher uses `.local-go/go/bin/go` first, then Go 1.25 or later on `PATH`. The full audio app requires macOS, Cgo, Xcode Command Line Tools, and the Kyoko Japanese voice. Keep JavaScript in the browser for capture, UI, and playback. Use Cgo to call whisper.cpp and let the native C++/Metal engines run inference. The Python scripts in the benchmark record reproduce earlier MLX experiments. [Go module](go.mod) · [toolchain pin](go-toolchain.json)
+- Build the backend, installer, model manager, CLI, and tests in Go. The launcher uses `.local-go/go/bin/go` first, then Go 1.25 or later on `PATH`. The full audio app requires macOS, Cgo, Xcode Command Line Tools, and the Kyoko Japanese voice. Keep JavaScript in the browser for capture, UI, and playback. Use Cgo to call whisper.cpp and let the native C++/Metal engines run inference. The earlier MLX experiments used Python. Run new app benchmarks through the Go CLI. [Go module](go.mod) · [toolchain pin](go-toolchain.json)
 - Run `./yoyaku setup` to download and verify the pinned engines and default weights, then `./yoyaku serve`. The Gemma and Whisper weight files alone take about 14.62 GB and 0.49 GB on disk. We measured the models on a Mac with 48 GiB of unified memory. We have yet to measure the minimum memory needed to run the whole app. [Model pins](models.json) · [engine pins](native-runtimes.json)
 - The rehearsal at `/` accepts microphone or typed replies. For continuous interpretation at `/live`, grant browser audio permissions and select a language for each input. Duplex capture uses a Korean microphone plus Japanese tab audio, or two distinct input devices. A single input supports one direction.
 
@@ -85,7 +85,12 @@ Have the UI, CLI, and tests read the same scenarios through the loader or API. W
 
 Whisper transcribes a growing 16 kHz mono PCM16 recording and supplies timestamps for its tokens. Before asking the LLM for a decision, the Go controller must see the same candidate text twice and see it stay stable for 600 ms. It also needs either 400 ms of audio after the candidate or 700 ms of quiet. If the LLM returns `R`, check that the source and its alignment are still current, the session is open, and the deadline has not passed. Commit only the aligned portion and keep the remaining audio for the next pass. Silence alone cannot settle an unfinished condition, negation, or correction.
 
-A can have provisional Korean captions while the model is still waiting. Revise them when the transcript changes and discard translations for older text. Play B's committed segments in order. When B stops playback, invalidate the old output generation. Hold new audio until the browser acknowledges the matching clear command.
+A can have provisional Korean captions while the model is still waiting.
+If recognition only appends words, a translation of the unchanged prefix can appear while the full caption is pending.
+If recognition replaces words that have already been translated, invalidate the caption and discard late translations of the replaced text.
+Play B's committed segments in order.
+When B stops playback, invalidate the old output generation.
+Hold new audio until the browser acknowledges the matching clear command.
 
 Each `streams.json` case has `id`, `title`, `track`, `language`, and `snapshots`. Use `ja-JP` for `shop` and `ko-KR` for `user`.
 

@@ -243,7 +243,8 @@ func TestLiveSocketRealHTTPAdaptersAndNoInheritedBodyDeadline(t *testing.T) {
 	conn := h.dial(t)
 	writeSocket(t, conn, audioMessage(1))
 	readUntil(t, conn, "audio.processed")
-	// HTTP 본문 처리 기한과 인식 원문의 안정화 시간이 모두 지난 뒤에도 같은 연결로 보낼 수 있어야 한다.
+	// 650 ms면 테스트 서버의 HTTP 읽기 기한(80 ms)과 원문 안정화 시간(600 ms)이 모두 지난다.
+	// 두 번째 녹음도 같은 WebSocket으로 보내야 연결이 유지되는지 확인할 수 있다.
 	time.Sleep(650 * time.Millisecond)
 	writeSocket(t, conn, audioMessage(2))
 	spoken := readUntil(t, conn, "tts.request")

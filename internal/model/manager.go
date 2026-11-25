@@ -16,7 +16,8 @@ import (
 	"time"
 )
 
-// Process는 한 관리자가 시작하고 종료한다. Stop은 프로세스가 완전히 끝날 때까지 기다려야 한다.
+// Process는 모델 관리자가 직접 띄운 자식 프로세스다.
+// 다음 모델이 같은 포트를 쓰므로 Stop은 이전 프로세스가 종료된 뒤 반환해야 한다.
 type Process interface {
 	Ready(context.Context) error
 	Stop()
