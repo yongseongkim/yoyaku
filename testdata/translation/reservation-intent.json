@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "contract": "Predeclared Korean intent notes for bilingual source/output review. Equivalent wording is accepted. Notes, case IDs and references are withheld from inference.",
+  "cases": [
+    {"id":"ko-waitlist","text":"대기 명단에는 올려 주세요. 자리가 나도 전화로 확인하기 전에는 예약을 확정하지 말아 주세요.","source_language":"ko-KR","target_language":"ja-JP","intent":"대기 등록 요청 / 빈자리만으로 확정 금지 / 전화 확인이 조건"},
+    {"id":"ko-party","text":"어른 둘에 아기 하나예요. 자리는 두 개면 되고 아기 의자만 하나 부탁드려요.","source_language":"ko-KR","target_language":"ja-JP","intent":"어른 2·아기 1 / 일반 좌석 2 / 아기 의자 1 요청"},
+    {"id":"ko-allergy","text":"새우살만 빼 주시면 되는 게 아니라 새우로 낸 육수도 못 먹어요.","source_language":"ko-KR","target_language":"ja-JP","intent":"살 제거만으로 부족 / 새우 육수도 섭취 불가"},
+    {"id":"ko-fee","text":"세 명 중 한 명만 못 가면 취소 수수료는 그 한 명 몫에만 붙나요?","source_language":"ko-KR","target_language":"ja-JP","intent":"3명 중 1명 불참 / 수수료가 그 1명분에만 붙는지 질문"},
+    {"id":"ko-late","text":"십오 분 늦을 것 같아요. 자리를 못 지켜 주셔도 지금 취소해 달라는 뜻은 아니에요.","source_language":"ko-KR","target_language":"ja-JP","intent":"15분 지각 예상 / 자리 보장 못 해도 / 지금 취소 요청 아님"},
+    {"id":"ko-name","text":"성은 강이고 이름은 유리예요. 유리 강이 아니라 강유리로 적어 주세요.","source_language":"ko-KR","target_language":"ja-JP","intent":"성 강·이름 유리 / 역순 거부 / 강유리 순서 요청"},
+    {"id":"ko-deposit","text":"예약금이 식사값에서 빠지는 건가요, 아니면 나중에 따로 돌려주시나요?","source_language":"ko-KR","target_language":"ja-JP","intent":"예약금의 식사값 차감 또는 추후 별도 환급 / 둘 중 무엇인지 질문"},
+    {"id":"ko-phone","text":"제가 다시 전화할게요. 뒤 네 자리가 0350인 번호로는 연락하지 말아 주세요.","source_language":"ko-KR","target_language":"ja-JP","intent":"내가 다시 전화 / 끝 네 자리 0350 / 해당 번호로 연락 금지"},
+    {"id":"ko-branch","text":"역 앞 지점에 한 예약은 그대로 두고요, 이 지점에는 빈자리만 물어보는 거예요.","source_language":"ko-KR","target_language":"ja-JP","intent":"역 앞 지점 예약 유지 / 이 지점은 빈자리 문의만"},
+    {"id":"ko-datefix","text":"음 십사일, 아 십사일 말고 이십사일 저녁 여섯 시 반이요.","source_language":"ko-KR","target_language":"ja-JP","intent":"14일에서 24일로 정정 / 오후 6시 반"},
+    {"id":"ja-deadline","text":"仮押さえは今日の午後五時までです。それまでにお返事がなければ自動で解除されます。","source_language":"ja-JP","target_language":"ko-KR","intent":"임시 확보 / 오늘 오후 5시까지 / 회신 없으면 자동 해제"},
+    {"id":"ja-allergy","text":"そばを使わない料理はありますが、同じ鍋を使うので混入しないとは言い切れません。","source_language":"ja-JP","target_language":"ko-KR","intent":"메밀 미사용 메뉴 있음 / 같은 냄비 / 혼입 배제 불가"},
+    {"id":"ja-split","text":"四名様ですと二名様ずつ別のテーブルになりますが、それでもよろしいですか。","source_language":"ja-JP","target_language":"ko-KR","intent":"4명은 2명씩 다른 테이블 / 동의 여부를 물음"},
+    {"id":"ja-charge","text":"席料はお一人五百円ですが、小学生以下のお子様からはいただきません。","source_language":"ja-JP","target_language":"ko-KR","intent":"좌석료 1인 500엔 / 초등학생 포함 그 이하 면제"},
+    {"id":"ja-lastorder","text":"九時は閉店の時間で、ラストオーダーはその四十分前です。","source_language":"ja-JP","target_language":"ko-KR","intent":"9시는 폐점 / 라스트 오더 40분 전"},
+    {"id":"ja-callback","text":"こちらから折り返しますので、お客様からかけ直していただく必要はございません。","source_language":"ja-JP","target_language":"ko-KR","intent":"가게가 회신 / 손님이 다시 전화할 필요 없음"},
+    {"id":"ja-cancel","text":"コースだけ取り消しました。お席のご予約は二名様のまま残っています。","source_language":"ja-JP","target_language":"ko-KR","intent":"코스만 취소 / 좌석 예약 2명 유지"},
+    {"id":"ja-arrival","text":"おそろいになる前でも入れますが、二時間のお席は最初の方が来られた時からです。","source_language":"ja-JP","target_language":"ko-KR","intent":"전원 집합 전 입장 가능 / 2시간 / 첫 사람 도착부터"},
+    {"id":"ja-alt","text":"あ、七時半は本店の空きです。こちらの支店でしたら八時半からになります。","source_language":"ja-JP","target_language":"ko-KR","intent":"7시 반은 본점 / 이 지점은 8시 반부터"},
+    {"id":"ja-payment","text":"お支払いはまとめてお願いします。領収書だけでしたら二枚に分けられます。","source_language":"ja-JP","target_language":"ko-KR","intent":"결제는 일괄 / 영수증만 두 장으로 분리 가능"}
+  ]
+}

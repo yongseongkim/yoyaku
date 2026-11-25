@@ -1,0 +1,9 @@
+{
+  "llama_version":"v1.0.0/b12359",
+  "whisper_version":"v1.9.5/b5454",
+  "llama": {
+    "darwin-arm64":{"url":"https://github.com/ggml-org/llama.cpp/releases/download/b12359/llama-b12359-bin-macos-arm64.tar.gz","file":"llama-b12359-bin-macos-arm64.tar.gz","sha256":"82b00abc740160e1b9980e6cc79c117345fa34af058c80e6c0a69aa8ddccde75"},
+    "darwin-amd64":{"url":"https://github.com/ggml-org/llama.cpp/releases/download/b12359/llama-b12359-bin-macos-x64.tar.gz","file":"llama-b12359-bin-macos-x64.tar.gz","sha256":"25320d529077ef5a3d16e7b5da26438f221d88c8c0930a32b0c79457f5eede56"}
+  },
+  "whisper":{"url":"https://github.com/ggml-org/whisper.cpp/releases/download/b5454/whisper-b5454-xcframework.zip","file":"whisper-b5454-xcframework.zip","sha256":"e57f8c48933000acabc13bb913fbe82805d483a2deff692cc6738836bd92393b"}
+}

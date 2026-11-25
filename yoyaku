@@ -1,0 +1,14 @@
+#!/bin/sh
+set -eu
+YOYAKU_ROOT=$(CDPATH= cd -- "$(dirname -- "$0")" && pwd)
+cd "$YOYAKU_ROOT"
+YOYAKU_GO="$YOYAKU_ROOT/.local-go/go/bin/go"
+if [ ! -x "$YOYAKU_GO" ]; then YOYAKU_GO=$(command -v go || true); fi
+if [ -z "$YOYAKU_GO" ]; then echo 'Install Go 1.25+ (with Cgo) or unpack the pinned toolchain in .local-go/go.' >&2; exit 1; fi
+export GOCACHE="$YOYAKU_ROOT/.local-go/cache"
+export GOMODCACHE="$YOYAKU_ROOT/.local-go/pkg/mod"
+export GOPATH="$YOYAKU_ROOT/.local-go/gopath"
+export GOTOOLCHAIN=local
+mkdir -p "$YOYAKU_ROOT/.local-go/bin"
+"$YOYAKU_GO" build -o "$YOYAKU_ROOT/.local-go/bin/yoyaku" ./cmd/yoyaku
+exec "$YOYAKU_ROOT/.local-go/bin/yoyaku" "$@"

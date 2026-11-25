@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="ko">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>yoyaku · 연속 통역</title><link rel="icon" href="/favicon.svg"><link rel="stylesheet" href="/demo.css"><script type="module" src="/live.js"></script></head>
+<body><div class="shell">
+  <header><a class="brand" href="/">y.<span>yoyaku <small>よやく</small></span></a><a class="text" href="/">문장별 예약 연습으로</a></header>
+  <main>
+    <div class="intro"><p class="eyebrow">한국어 ⇄ 日本語 · 연속 입력</p><h1>듣기는 계속,<br><em>번역은 의미가 모이면.</em></h1><p>말하는 동안 원문과 잠정 자막을 갱신합니다.<br>안정된 한국어 의미 구간을 일본어로 읽어드려요.</p></div>
+    <section class="live-settings" aria-label="연속 통역 설정">
+      <div class="field"><label for="live-mode">오디오 연결 방식</label><select id="live-mode"><option value="user">한국어 마이크 → 일본어 음성</option><option value="shop">일본어 마이크 → 한국어 자막</option><option value="duplex-tab">양방향: 한국어 마이크 + 일본어 탭 오디오</option><option value="duplex-mics">양방향: 서로 다른 두 입력 장치</option></select></div>
+      <div class="field"><label for="user-device">한국어 입력 장치</label><select id="user-device"><option value="">기본 마이크</option></select></div>
+      <div class="field"><label for="shop-device">일본어 입력 장치</label><select id="shop-device"><option value="">기본 마이크</option></select></div>
+      <div class="controls"><label class="checkbox"><input id="live-speak" type="checkbox" checked> 일본어 답변 읽어주기</label><button id="live-check" class="text">서비스 다시 확인</button></div>
+      <p id="live-health" class="connection" role="status">로컬 서비스 확인 중…</p>
+      <div class="controls"><span>한국어</span><div class="level" aria-label="한국어 입력 음량"><div id="user-level"></div></div><span>日本語</span><div class="level" aria-label="일본어 입력 음량"><div id="shop-level"></div></div></div>
+      <div class="turn-controls"><button id="live-start" class="primary" disabled>연속 통역 시작</button><button id="live-stop-output" class="secondary" disabled>일본어 음성 중단</button><button id="live-end" class="secondary" disabled>통역 종료</button></div>
+    </section>
+    <div id="live-error" class="error" role="alert" hidden></div>
+    <section class="practice" aria-label="실시간 원문과 번역">
+      <div class="practice-heading"><h2>원문과 번역</h2><span id="live-status" role="status">준비</span></div>
+      <div id="live-conversation" class="conversation" role="log" aria-live="polite" aria-label="연속 통역 기록"><p class="empty">시작한 뒤 편하게 말해 주세요. 문장마다 버튼을 누를 필요는 없어요.</p></div>
+    </section>
+    <p class="note">양방향 통역에서는 한국어와 일본어를 서로 다른 입력으로 받아요. 재생한 소리가 마이크에 다시 들어가지 않도록 헤드폰을 사용해 주세요.<br>일본어가 나오는 탭을 선택하고 ‘탭 오디오 공유’를 켜세요. 탭 오디오를 공유할 수 없다면 일본어용 마이크나 가상 오디오 장치를 선택하세요.</p>
+    <details class="help"><summary>번역 시점 판단 기록</summary><p>R은 지금까지 들은 말만으로 뜻이 통한다는 표시예요. W가 나오면 뒷말을 더 기다려요. 받아쓴 원문이 바뀌면 이전 판단은 버려요. 녹음은 파일로 저장하지 않아요.</p><pre id="live-trace" aria-label="인식과 의미 구간 판단 로그"></pre></details>
+    <details class="help"><summary>처리 방식과 한계</summary><p>Whisper가 지금까지 쌓인 녹음을 다시 들으며 원문을 고쳐요. 한 번에 최대 20초를 듣고, 약 900 ms 이상의 간격을 두고 최신 녹음을 처리해요. 두 번 연속 같은 말로 인식되고 잠시 동안 원문이 바뀌지 않으면 모델이 뜻이 통하는지 판단해요. 자막이 뜨는 시간은 녹음 길이와 Mac의 부하에 따라 달라져요.</p><p>한 구간을 번역한 뒤에도 뒤에 남은 말은 계속 들어요. 이미 재생한 뒤에 말을 고치면 정정한 내용은 다음 구간에서 번역해요. 20초 안에 구간을 확정하지 못하면 통역을 다시 시작하라는 안내가 나와요.</p><p>일본어는 마이크나 공유 탭에서 받아요. 실제 전화 연결은 아직 지원하지 않아요. 모델을 바꾸려면 통역을 종료하고 문장 연습 화면에서 선택하세요.</p><pre>./yoyaku setup
+./yoyaku serve</pre></details>
+  </main><footer>yoyaku よやく <span>대화의 타이밍은 내가.</span></footer>
+</div></body></html>
